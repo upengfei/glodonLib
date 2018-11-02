@@ -18,7 +18,7 @@ class ReqResponse(Response):
 
 class HttpReq(object):
     def __init__(self):
-        self.s = requests.session()
+        self.s = requests.Session()
     
     def post_with_header(self, data, url, *header):
         """
