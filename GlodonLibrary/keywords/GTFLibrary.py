@@ -200,7 +200,7 @@ class Control:
         return _BaseControl(flag, controlName).BaseGetText()
     
     def Checked(self,flag, controlName):
-        return BaseControl(flag, controlName).BaseChecked()
+        return _BaseControl(flag, controlName).BaseChecked()
     
     def Find(self,flag, controlName):
         return _BaseControl(flag, controlName).BaseFind()
