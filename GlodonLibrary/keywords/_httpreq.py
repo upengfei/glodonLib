@@ -17,8 +17,7 @@ class ReqResponse(Response):
 
 
 class HttpReq(object):
-    def __init__(self):
-        self.s = requests.Session()
+    s = requests.Session()
     
     def post_with_header(self, data, url, *header):
         """
@@ -33,13 +32,13 @@ class HttpReq(object):
         for parameter in header:
             exec (strDict + parameter)
         if not headers:
-            r = self.s.post(url, json = data)
+            r = HttpReq.s.post(url, json = data)
             resultObj = r.text
             return json.loads(resultObj)  # 获取服务器返回的页面信息,转为dict
         else:
             data = json.loads(data)
             try:
-                r = self.s.post(url, headers=headers, json = data)
+                r = HttpReq.s.post(url, headers=headers, json = data)
             except:
                 traceback.print_exc()
                 raise
@@ -58,12 +57,12 @@ class HttpReq(object):
         for parameter in header:
             exec (strDict + parameter)
         if not headers:
-            r = self.s.get(url)
+            r = HttpReq.s.get(url)
             resultObj = r.text
             return json.loads(resultObj)  # 获取服务器返回的页面信息,转为dict
         else:
             try:
-                r = self.s.get(url, headers=headers)
+                r = HttpReq.s.get(url, headers=headers)
                 resultObj = r.text
             except:
                 traceback.print_exc()
@@ -75,7 +74,7 @@ class HttpReq(object):
         Send an HTTP request, and catch any exception that might occur due to connection problems.
         """
         try:
-            return self.s.request(self, method, url, **kwargs)
+            return HttpReq.s.request(method, url, **kwargs)
         except (MissingSchema, InvalidSchema, InvalidURL):
             raise
         except RequestException as e:
